@@ -1,0 +1,33 @@
+{
+    "name": "cttruyen-api",
+    "version": "1.0.0",
+    "description": "",
+    "main": "./src/api.js",
+    "type": "module",
+    "scripts": {
+        "start": "node ./src/api.js",
+        "dev": "nodemon --inspect ./src/api.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/vochithanh89/cttruyen-api.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/vochithanh89/cttruyen-api/issues"
+    },
+    "homepage": "https://github.com/vochithanh89/cttruyen-api#readme",
+    "dependencies": {
+        "axios": "^0.27.2",
+        "cheerio": "^1.0.0-rc.11",
+        "cors": "^2.8.5",
+        "dotenv": "^16.0.3",
+        "express": "^4.18.1",
+        "node-fetch": "^3.3.0"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.16"
+    }
+}
