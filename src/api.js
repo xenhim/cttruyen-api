@@ -10,16 +10,14 @@ const port = process.env.PORT || 8080;
 dotenv.config();
 
 /* CROS middleware */
-const whitelist = process.env.ALLOW_DOMAINS;
+const whitelist = JSON.parse(process.env.ALLOW_DOMAINS);
 const environment = process.env.APP_ENV;
 
 const corsOptions = {
     origin: function (origin, callback) {
-        if (
-            whitelist.indexOf(origin) !== -1 ||
-            environment === 'development' ||
-            (environment === 'production' && origin)
-        ) {
+        if (whitelist.includes(origin)) {
+            callback(null, true);
+        } else if (!origin && environment == 'development') {
             callback(null, true);
         } else {
             callback(new Error("You don't have permission to access this page"));
