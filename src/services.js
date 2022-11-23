@@ -12,7 +12,6 @@ export const fetchImageWithAuth = async (url, referer) => {
 };
 
 export const getHtmlData = async (path, options) => {
-    decodeImageUrl('');
     const res = await gotScraping.get(baseUrl + path, options);
     return res.body;
 };
