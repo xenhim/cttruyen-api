@@ -211,7 +211,7 @@ export const getChapters = (html, chapterId, currentHref) => {
     const id = $('.top .txt-primary a')
         .attr('href')
         .replace(baseUrl + '/truyen-tranh/', '');
-    const chapterName = $('.top .txt-primary span').text();
+    const chapterName = $('.top .txt-primary span').text().replace('-', '').trim();
     const updatedAt = $('.top i').text();
 
     return {

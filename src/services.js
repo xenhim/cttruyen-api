@@ -1,18 +1,18 @@
-import fetch from 'node-fetch';
+import { got, gotScraping } from 'got-scraping';
 import { baseUrl } from './constants.js';
-
-export const decodeImageUrl = (imgUrl) => {};
-
-export const encodeImageUrl = (imgUrl) => {};
 
 export const fetchImageWithAuth = async (url, referer) => {
     const options = {
-        responseType: 'arraybuffer',
         headers: {
             Referer: baseUrl,
         },
     };
-    const response = await fetch(url, options);
-    const buffer = await response.arrayBuffer();
+    const buffer = await got(url, options).buffer();
     return Buffer.from(buffer, 'base64');
+};
+
+export const getHtmlData = async (path, options) => {
+    decodeImageUrl('');
+    const res = await gotScraping.get(baseUrl + path, options);
+    return res.body;
 };

@@ -3,15 +3,15 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 
 import { getCategories, getChapters, getDetails, getFilter, getImageBase64, getList } from './model.js';
-import { getHtmlData } from './base.js';
+import { getHtmlData } from './services.js';
 
 const app = express();
 const port = process.env.PORT || 8080;
 dotenv.config();
+const environment = process.env.APP_ENV;
 
 /* CROS middleware */
 const whitelist = JSON.parse(process.env.ALLOW_DOMAINS);
-const environment = process.env.APP_ENV;
 
 const corsOptions = {
     origin: function (origin, callback) {
@@ -48,7 +48,7 @@ app.get('/', (req, res) => {
         },
         {
             title: 'Thể loại',
-            path: '/category',
+            path: '/categories',
         },
         {
             title: 'Thông tin truyện',
@@ -105,7 +105,7 @@ app.get('/list', async (req, res) => {
         };
 
         const html = await getHtmlData(path, {
-            params: {
+            searchParams: {
                 ...myParams,
             },
         });
@@ -126,7 +126,7 @@ app.get('/search', async (req, res) => {
         const { page = 1, q } = req.query;
 
         const html = await getHtmlData('/tim-truyen', {
-            params: {
+            searchParams: {
                 keyword: q,
                 page: page,
             },
@@ -196,6 +196,17 @@ app.get('/image/*', async (req, res) => {
             message,
             name,
         });
+    }
+});
+
+app.get('/test', async (req, res) => {
+    try {
+        if (environment == 'development') {
+            const html = await getHtmlData(``);
+            res.send(html);
+        }
+    } catch (error) {
+        res.status(400).json(error);
     }
 });
 
