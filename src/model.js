@@ -135,7 +135,7 @@ export const getList = (html, page, currentHref) => {
     };
 };
 
-export const getDetails = (html, id) => {
+export const getDetails = (html, id, currentHref) => {
     const $ = cheerio.load(html);
     const chapters = [];
     const categories = [];
