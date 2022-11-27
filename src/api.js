@@ -109,8 +109,8 @@ app.get('/list', async (req, res) => {
                 ...myParams,
             },
         });
-
-        const data = getList(html, page);
+        const currentHref = req.protocol + '://' + req.get('host');
+        const data = getList(html, page, currentHref);
         res.status(200).json(data);
     } catch (error) {
         const { message, name } = error;
@@ -131,8 +131,8 @@ app.get('/search', async (req, res) => {
                 page: page,
             },
         });
-
-        const data = getList(html, page);
+        const currentHref = req.protocol + '://' + req.get('host');
+        const data = getList(html, page, currentHref);
         res.status(200).json(data);
     } catch (error) {
         const { message, name } = error;
@@ -148,8 +148,8 @@ app.get('/details/*', async (req, res) => {
         const id = req.params[0];
 
         const html = await getHtmlData(`/truyen-tranh/${id}`);
-
-        const data = getDetails(html, id);
+        const currentHref = req.protocol + '://' + req.get('host');
+        const data = getDetails(html, id, currentHref);
 
         res.status(200).json(data);
     } catch (error) {

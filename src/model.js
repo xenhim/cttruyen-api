@@ -1,6 +1,6 @@
 import cheerio from 'cheerio';
 import { baseUrl } from './constants.js';
-import { fetchImageWithAuth } from './services.js';
+import { dencodeImageUrl, encodeImageUrl, fetchImageWithAuth } from './services.js';
 
 export const getCategories = (html) => {
     const categories = [];
@@ -90,7 +90,7 @@ export const getFilter = (html) => {
     ];
 };
 
-export const getList = (html, page) => {
+export const getList = (html, page, currentHref) => {
     const $ = cheerio.load(html);
     const data = [];
     $('.ModuleContent .items .row .item').each((index, element) => {
@@ -111,7 +111,7 @@ export const getList = (html, page) => {
         data.push({
             id: id,
             mangaName,
-            posterUrl: posterUrl,
+            posterUrl: currentHref + '/image/' + encodeImageUrl(posterUrl),
             newestChapter: {
                 chapterName,
                 chapterId,
@@ -179,7 +179,7 @@ export const getDetails = (html, id) => {
         id,
         mangaName,
         description,
-        posterUrl,
+        posterUrl: currentHref + '/image/' + encodeImageUrl(posterUrl),
         chapters,
         categories,
         otherDetails: {
@@ -203,7 +203,7 @@ export const getChapters = (html, chapterId, currentHref) => {
 
         chapterImages.push({
             title,
-            imgUrl,
+            imgUrl: currentHref + '/image/' + encodeImageUrl(imgUrl),
         });
     });
 
@@ -227,6 +227,6 @@ export const getChapters = (html, chapterId, currentHref) => {
 };
 
 export const getImageBase64 = async (imageId) => {
-    const imageUrl = 'https://' + imageId;
-    return await fetchImageWithAuth(imageUrl);
+    const imgUrl = dencodeImageUrl(imageId);
+    return await fetchImageWithAuth(imgUrl);
 };
