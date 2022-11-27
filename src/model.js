@@ -111,7 +111,7 @@ export const getList = (html, page, currentHref) => {
         data.push({
             id: id,
             mangaName,
-            posterUrl: currentHref + '/image/' + encodeImageUrl(posterUrl),
+            posterUrl,
             newestChapter: {
                 chapterName,
                 chapterId,
@@ -179,7 +179,7 @@ export const getDetails = (html, id, currentHref) => {
         id,
         mangaName,
         description,
-        posterUrl: currentHref + '/image/' + encodeImageUrl(posterUrl),
+        posterUrl,
         chapters,
         categories,
         otherDetails: {
