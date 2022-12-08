@@ -13,7 +13,7 @@ export const fetchImageWithAuth = async (imgUrl) => {
     let myImgUrl = imgUrl;
     if (imgUrl.startsWith('//')) {
         myImgUrl = imgUrl.replace('//', 'https://');
-    } else if (!imgUrl.startsWith('https://')) {
+    } else if (!imgUrl.startsWith('https://') && !imgUrl.startsWith('http://')) {
         myImgUrl += 'https://';
     }
 
