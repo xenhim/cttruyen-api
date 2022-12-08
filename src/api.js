@@ -94,9 +94,14 @@ app.get('/categories', async (req, res) => {
 
 app.get('/list', async (req, res) => {
     try {
-        const { page = 1, status, sort, category = 'all' } = req.query;
+        const { page = 1, status = -1, sort = 0, category = 'all' } = req.query;
+        let path;
 
-        let path = category !== 'all' ? `/tim-truyen/${category}` : '/tim-truyen';
+        if (status == 2 && sort == 0 && category === 'all') {
+            path = '/truyen-full';
+        } else {
+            path = category !== 'all' ? `/tim-truyen/${category}` : '/tim-truyen';
+        }
 
         let myParams = {
             status: status,
