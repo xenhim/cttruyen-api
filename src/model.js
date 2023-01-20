@@ -203,8 +203,8 @@ export const getChapters = (html, chapterId, currentHref) => {
 
         chapterImages.push({
             title,
-            // imgUrl: currentHref + '/image/' + encodeImageUrl(imgUrl),
-            imgUrl,
+            imgUrl: currentHref + '/image/' + encodeImageUrl(imgUrl),
+            // imgUrl,
         });
     });
 
