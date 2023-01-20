@@ -203,7 +203,8 @@ export const getChapters = (html, chapterId, currentHref) => {
 
         chapterImages.push({
             title,
-            imgUrl: currentHref + '/image/' + encodeImageUrl(imgUrl),
+            // imgUrl: currentHref + '/image/' + encodeImageUrl(imgUrl),
+            imgUrl,
         });
     });
 
@@ -228,5 +229,6 @@ export const getChapters = (html, chapterId, currentHref) => {
 
 export const getImageBase64 = async (imageId) => {
     const imgUrl = dencodeImageUrl(imageId);
+    // const imgUrl = imageId;
     return await fetchImageWithAuth(imgUrl);
 };
